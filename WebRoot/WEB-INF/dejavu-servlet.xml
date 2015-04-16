@@ -20,5 +20,5 @@
 	    <property name="suffix" value=".jsp"/>
 	</bean>
 	
-	<bean name="/*" class="com.boredsaint.controller.LoginController" />
+	<bean name="/login.do" class="com.boredsaint.controller.LoginController" />
 </beans>

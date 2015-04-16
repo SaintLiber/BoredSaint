@@ -1,0 +1,49 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="utf-8"/>
+ <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />添加一个meta标签，以便使您的页面更好的在移动平台上展示-->
+<title>异步加载</title>
+<style type="text/css">  
+    html{height:100%}    
+    body{height:100%;margin:0px;padding:0px}
+    #container{height:100%}    
+</style>
+<script type="text/javascript">  
+function initialize() {  
+  var map = new BMap.Map("map");  
+  var point = new BMap.Point(116.397442, 39.985962);
+  map.centerAndZoom(point, 15); 
+  map.enableScrollWheelZoom();  
+  var marker = new BMap.Marker(point);        // 创建标注    
+  map.addOverlay(marker); 
+  marker.addEventListener("click", function(){    
+	alert("您点击了标注");    
+  });
+  marker.enableDragging();    
+    marker.addEventListener("dragend", function(e){    
+    alert("当前位置：" + e.point.lng + ", " + e.point.lat);    
+  });
+  
+    var opts = {    
+	 width : 250,     // 信息窗口宽度    
+	 height: 100,     // 信息窗口高度    
+	 title : "Hello"  // 信息窗口标题   
+	}    
+	var infoWindow = new BMap.InfoWindow("World", opts);  // 创建信息窗口对象    
+	map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+}  
+   
+function loadScript() {  
+  var script = document.createElement("script");  
+  script.src = "http://api.map.baidu.com/api?v=1.5&ak=80536e90822ae8fd4b9815a6bee92141&callback=initialize";//此为v1.5版本的引用方式
+  document.body.appendChild(script);  
+}  
+   
+window.onload = loadScript;  
+</script>  
+</head>  
+<body>  
+  <div id="map" style="width:500px;height:320px"></div>  
+</body>  
+</html>
